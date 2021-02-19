@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User registration</title>
+</head>
+<body>
+
+<form action="http://localhost:8080/register">
+    <input type="text" required name="name" placeholder="name" />
+    <input type="text" required name="surname" placeholder="surname" />
+    <input type="text" required name="login" placeholder="login" />
+    <input type="password" required name="password" placeholder="password" />
+    <button>registration</button>
+</form>
+<a href="http://localhost:8080/users/new">already have account</a>
+
+<form action="http://localhost:8080/users" method="get">
+<input type="submit" value="List of Users"></form>
+</body>
+</html>
