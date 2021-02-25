@@ -1,31 +1,41 @@
 package com.alinatkachuk.springtask.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.alinatkachuk.springtask.dao.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alinatkachuk.springtask.entity.User;
 
 @Controller
 public class LoginController {
 	
-	List<User> users = new ArrayList<>();
-	
-	@GetMapping ("/register")
-	public String registerPage() {
-		return "register.html";
+	private final UserDAO userDAO;
+
+	@Autowired
+	public LoginController(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 
 	@GetMapping ("/users")
-	public String usersPage() {
-		return "usersPage.html";
+	public String usersPage(Model model) {
+		model.addAttribute("allUsers", userDAO.showUsers());
+		return "usersPage";
 	}
-	
+
+	@GetMapping ("/register")
+	public String registerPage(Model model) {
+		model.addAttribute("user", new User());
+		return "registerPage";
+	}
+
 	@PostMapping ("/users/new")
-	public void doRegister() {
-		
+	public String doRegister(@ModelAttribute ("user") User user) {
+		userDAO.saveUsers(user);
+		return "redirect:/users";
 	}
 }
