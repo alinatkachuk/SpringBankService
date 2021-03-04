@@ -1,24 +1,42 @@
 package com.alinatkachuk.springtask.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import javax.persistence.*;
 
-public class User<DebitCart, Loan> implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "data_user")
+public class User<DebitCart, Loan>  {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
 	private String firstName;
+
 	private String lastName;
+
 	private Calendar birthDate;
+
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
+
 	private String email;
+
 	private String password;
-	private ArrayList<BankService> bankService;
-	private ArrayList<DebitCart> debitCart;
-	private ArrayList<Loan> loan;
+
+	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Column(name = "debit_cart")
+	private List<DebitCart> debitCart;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@Column(name = "loan")
+	private List<Loan> loan;
+
+	public long getId() { return id; }
+	public void setId (long id) {
+		this.id=id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -62,27 +80,29 @@ public class User<DebitCart, Loan> implements Serializable {
 		this.password=password;
 	}
 
-	public ArrayList<DebitCart> getDebitCart() {
+	public List<DebitCart> getDebitCart() {
 		return debitCart;
 	}
-	public void setDebitCart(ArrayList<DebitCart> debitCart) {
+	public void setDebitCart(List<DebitCart> debitCart) {
 		this.debitCart=debitCart;
 	}
 
-	public ArrayList<Loan> getLoan() {
+	public List<Loan> getLoan() {
 		return loan;
 	}
-	public void setLoan(ArrayList<Loan> loan) {
+	public void setLoan(List<Loan> loan) {
 		this.loan=loan;
 	}
 
 	public String toString() {
-		return "First name: "+firstName+"\n"+
+		return  "Id: "+id+"\n"+
+				"First name: "+firstName+"\n"+
 				"Last name: "+lastName+"\n"+
 				"Birth date: "+birthDate+"\n"+
 				"Gender: "+gender+"\n"+
 				"Email: "+email+"\n"+
 				"Password: "+password+"\n";
 	}
+
 }
 

@@ -6,7 +6,7 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;
+		return new Class[]{HibernateConfig.class};
 	}
 
 	@Override
@@ -18,5 +18,6 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 	protected String[] getServletMappings() {
 		return new String[]{"/"};
 	}
+
 
 }

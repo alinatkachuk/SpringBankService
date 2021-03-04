@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="users : ${allUsers}">
-    <a th:text="${users.getName()}">user</a>
+    <p th:text="${users.getFirstName()}"></p>
 </div>
 
 <a href="http://localhost:8080/register">Go to registration</a>
