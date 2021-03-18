@@ -1,6 +1,7 @@
 package com.alinatkachuk.springtask.dao;
 
 import com.alinatkachuk.springtask.entity.DebitCard;
+
 import java.util.List;
 
 public interface DebitCardDAO {

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "data_user")
-public class User<DebitCart, Loan>  {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,8 @@ public class User<DebitCart, Loan>  {
 	private String password;
 
 	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Column(name = "debit_cart")
-	private List<DebitCart> debitCart;
+	@Column(name = "debit_card")
+	private List<DebitCard> debitCard;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@Column(name = "loan")
@@ -80,11 +80,9 @@ public class User<DebitCart, Loan>  {
 		this.password=password;
 	}
 
-	public List<DebitCart> getDebitCart() {
-		return debitCart;
-	}
-	public void setDebitCart(List<DebitCart> debitCart) {
-		this.debitCart=debitCart;
+	public List<DebitCard> getDebitCard() { return debitCard; }
+	public void setDebitCard(List<DebitCard> debitCard) {
+		this.debitCard=debitCard;
 	}
 
 	public List<Loan> getLoan() {

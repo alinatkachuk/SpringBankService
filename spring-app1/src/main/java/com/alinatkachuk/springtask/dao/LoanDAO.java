@@ -1,6 +1,8 @@
 package com.alinatkachuk.springtask.dao;
 
 import com.alinatkachuk.springtask.entity.Loan;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface LoanDAO {

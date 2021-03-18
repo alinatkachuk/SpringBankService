@@ -2,7 +2,6 @@ package com.alinatkachuk.springtask.entity;
 
 import javax.persistence.*;
 import java.util.Calendar;
-import java.util.List;
 
 @Entity
 @Table(name = "data_debit_card")

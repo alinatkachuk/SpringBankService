@@ -1,6 +1,7 @@
 package com.alinatkachuk.springtask.dao;
 
 import com.alinatkachuk.springtask.entity.User;
+
 import java.util.List;
 
 public interface UserDAO {

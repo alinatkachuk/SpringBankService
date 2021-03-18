@@ -1,6 +1,6 @@
 package com.alinatkachuk.springtask.controller;
 
-import com.alinatkachuk.springtask.dao.UserDAOImpl;
+import com.alinatkachuk.springtask.dao.UserDAO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.alinatkachuk.springtask.entity.User;
 
-
 @Controller
 public class LoginController {
 
 	public static User user = null;
-	private final UserDAOImpl userDAOImpl;
+	private final UserDAO userDAO;
 
 	@Autowired
-	public LoginController(UserDAOImpl userDAOImpl) {
-		this.userDAOImpl = userDAOImpl;
+	public LoginController(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 
 	@GetMapping ("/users")
 	public String usersPage(Model model) {
-		model.addAttribute("allUsers", userDAOImpl.allUsers());
+		model.addAttribute("allUsers", userDAO.allUsers());
 		return "usersPage";
 	}
 
@@ -38,7 +37,7 @@ public class LoginController {
 
 	@PostMapping ("/users/new")
 	public String doRegister(@ModelAttribute ("user") User user) {
-		userDAOImpl.addUser(user);
+		userDAO.addUser(user);
 		return "redirect:/users";
 	}
 
@@ -50,7 +49,7 @@ public class LoginController {
 
 	@PostMapping ("/authorization/login")
 	public String doAuthorization(@ModelAttribute ("user") @Valid User user, BindingResult bindingResult) {
-		if (userDAOImpl.getUserByEmail(user.getEmail())==null) {
+		if (userDAO.getUserByEmail(user.getEmail())==null) {
 			bindingResult.addError(new ObjectError("user", new String[] {"All fields must be filled"},
 					null, null));
 			return "redirect:/authorization";
