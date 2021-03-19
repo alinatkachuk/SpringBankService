@@ -11,14 +11,18 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "registration_date")
     private Calendar registrationDate;
 
     private double sum;
 
+    @Column(name = "interest_rate")
     private double interestRate;
 
+    @Column(name = "loan_term")
     private int loanTerm;
 
+    @Column(name = "monthly_payment")
     private double monthlyPayment;
 
     @ManyToOne (fetch = FetchType.LAZY)

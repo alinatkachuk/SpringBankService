@@ -11,15 +11,19 @@ public class DebitCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "account_balance")
     private double accountBalance;
 
+    @Column(name = "card_number")
     private String cardNumber;
 
+    @Column(name = "expiration_date")
     private Calendar expirationDate;
 
     private String ccv;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition="enum('visa','mastercard', 'belcard')")
     private PaymentSystem paymentSystem;
 
     @ManyToOne (fetch = FetchType.LAZY)

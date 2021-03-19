@@ -12,13 +12,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(name = "first_name")
 	private String firstName;
 
+	@Column(name = "last_name")
 	private String lastName;
 
+	@Column(name = "birth_date")
 	private Calendar birthDate;
 
 	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition="enum('male','female')")
 	private Gender gender;
 
 	private String email;
@@ -26,11 +30,11 @@ public class User {
 	private String password;
 
 	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Column(name = "debit_card")
+	@Column(name = "debit_card_id")
 	private List<DebitCard> debitCard;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@Column(name = "loan")
+	@Column(name = "loan_id")
 	private List<Loan> loan;
 
 	public long getId() { return id; }
