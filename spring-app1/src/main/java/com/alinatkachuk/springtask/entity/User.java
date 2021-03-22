@@ -14,7 +14,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotEmpty (message = "The 'First name' field is empty!")
 	@Size (min = 2, max = 30, message = "Wrong size!")
@@ -49,7 +49,7 @@ public class User {
 	private List<Loan> loan;
 
 	public long getId() { return id; }
-	public void setId (long id) {
+	public void setId (Long id) {
 		this.id=id;
 	}
 

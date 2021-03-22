@@ -44,7 +44,7 @@ public class LoanDAOImpl implements LoanDAO{
     }
 
     @Override
-    public Loan getLoanById(int id) {
+    public Loan getLoanById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Loan.class, id);
     }

@@ -14,5 +14,5 @@ public interface DebitCardDAO {
 
     public void editDebitCard(DebitCard debitCard);
 
-    public DebitCard getDebitCardById(int id);
+    public DebitCard getDebitCardById(Long id);
 }

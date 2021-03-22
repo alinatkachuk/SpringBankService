@@ -15,6 +15,6 @@ public interface LoanDAO {
 
     public void editLoan(Loan loan);
 
-    public Loan getLoanById(int id);
+    public Loan getLoanById(Long id);
 }
 

@@ -51,12 +51,13 @@ public class LoginController {
 								  BindingResult bindingResult) {
 		User userByEmail = userDAO.getUserByEmail(user.getEmail());
 		if (bindingResult.hasErrors()) {
-			return "authorizePage";
+			return "redirect:/authorize";
 		} else if ((userByEmail.getPassword()).equals(user.getPassword())==true) {
-			user = userForLogin;
+			userForLogin = user;
 			return "afterAuthorize";
+		} else {
+			return "redirect:/authorize";
 		}
-		return "authorizePage";
 	}
 
 }

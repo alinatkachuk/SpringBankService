@@ -44,7 +44,7 @@ public class DebitCardDAOImpl implements DebitCardDAO {
     }
 
     @Override
-    public DebitCard getDebitCardById(int id) {
+    public DebitCard getDebitCardById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(DebitCard.class, id);
     }
