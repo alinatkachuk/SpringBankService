@@ -3,6 +3,7 @@ package com.alinatkachuk.springtask.dao;
 import com.alinatkachuk.springtask.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -51,7 +52,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUserByEmail(String email) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(User.class, email);
+        Query query = sessionFactory.getCurrentSession().createQuery ("from User where email=:email");
+        query.setParameter("email", email);
+        return (User) query.uniqueResult();
     }
 }
