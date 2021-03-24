@@ -50,14 +50,20 @@ public class LoginController {
 	public String doAuthorization(@ModelAttribute("user") @Valid User user,
 								  BindingResult bindingResult) {
 		User userByEmail = userDAO.getUserByEmail(user.getEmail());
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {                                           //doesn't work
 			return "redirect:/authorize";
 		} else if ((userByEmail.getPassword()).equals(user.getPassword())==true) {
-			userForLogin = user;
-			return "afterAuthorize";
+			userForLogin = userByEmail;
+			return "redirect:/home";
 		} else {
 			return "redirect:/authorize";
 		}
+	}
+
+	@GetMapping("/home")
+	public String userHomePage(Model model) {
+		model.addAttribute("userForLogin", userForLogin);
+		return "afterAuthorize";
 	}
 
 }

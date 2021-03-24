@@ -5,8 +5,12 @@
     <title>Create</title>
 </head>
 <body>
-<button href="http://localhost:8080/loans/new">Create loan</button>
+<p th:text="${userForLogin.getFirstName()}"></p>
 <br>
-<button href="http://localhost:8080/debitcards/new">Create debit card</button>
+<p th:text="${userForLogin.getLastName()}"></p>
+<br>
+<button href="http://localhost:8080/loans">Create loan</button>
+<br>
+<button href="http://localhost:8080/debitcards">Create debit card</button>
 </body>
 </html>
