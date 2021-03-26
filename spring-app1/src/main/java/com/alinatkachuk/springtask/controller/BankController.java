@@ -5,7 +5,6 @@ import com.alinatkachuk.springtask.dao.LoanDAO;
 import com.alinatkachuk.springtask.dao.UserDAO;
 import com.alinatkachuk.springtask.entity.DebitCard;
 import com.alinatkachuk.springtask.entity.Loan;
-import com.alinatkachuk.springtask.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,16 +35,16 @@ public class BankController {
         return "afterAuthorize";
     }
 
-    @GetMapping("/debitcards")
-    public String createDebitCardsPage(Model model) {
-        model.addAttribute("debitcard", new DebitCard());
-        return "afterAuthorize";
-    }
-
     @PostMapping("/loans/new")
     public String createLoan(@ModelAttribute("loan") Loan loan) {
         loanDAO.addLoan(loan);
         userDAO.editUser(userForLogin);
+        return "afterAuthorize";
+    }
+
+    @GetMapping("/debitcards")
+    public String createDebitCardsPage(Model model) {
+        model.addAttribute("debitcard", new DebitCard());
         return "afterAuthorize";
     }
 

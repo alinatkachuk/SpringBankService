@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.alinatkachuk.springtask.entity.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 @Controller
 public class LoginController {
 
@@ -20,7 +24,7 @@ public class LoginController {
 	@Autowired
 	public LoginController(UserDAO userDAO) {
 		this.userDAO = userDAO;
-	}
+    }
 
 	@GetMapping("/users")
 	public String usersPage(Model model) {
@@ -29,13 +33,18 @@ public class LoginController {
 	}
 
 	@GetMapping("/register")
-	public String registerPage(Model model) {
+	public String registerPage(Model model)  {
+		model.addAttribute("birthDate", "");
 		model.addAttribute("user", new User());
 		return "registerPage";
 	}
 
 	@PostMapping("/users/new")
-	public String doRegister(@ModelAttribute("user") User user) {
+	public String doRegister(@ModelAttribute("user") User user,
+							 @ModelAttribute("birthDate") String birthDate) throws ParseException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(birthDate));
+		user.setBirthDate(calendar);
 		userDAO.addUser(user);
 		return "redirect:/users";
 	}
@@ -52,7 +61,7 @@ public class LoginController {
 		User userByEmail = userDAO.getUserByEmail(user.getEmail());
 		if (bindingResult.hasErrors()) {                                           //doesn't work
 			return "redirect:/authorize";
-		} else if ((userByEmail.getPassword()).equals(user.getPassword())==true) {
+		} else if ((userByEmail.getPassword()).equals(user.getPassword())) {
 			userForLogin = userByEmail;
 			return "redirect:/home";
 		} else {
