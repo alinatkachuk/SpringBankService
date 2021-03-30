@@ -59,7 +59,7 @@ public class LoginController {
 	public String doAuthorization(@ModelAttribute("user") @Valid User user,
 								  BindingResult bindingResult) {
 		User userByEmail = userDAO.getUserByEmail(user.getEmail());
-		if (bindingResult.hasErrors()) {                                           //doesn't work
+		if (bindingResult.hasErrors()) {
 			return "redirect:/authorize";
 		} else if ((userByEmail.getPassword()).equals(user.getPassword())) {
 			userForLogin = userByEmail;

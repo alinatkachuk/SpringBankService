@@ -14,7 +14,8 @@
     <input type="text" th:field="*{lastName}" id="lastName"/>
     <br>
     <label for="birthDate">Choose birth date: </label>
-    <input text="date" th:value="*{birthDate}" id="birthDate"/>
+    <input type="date" th:value = "${birthDate}" id="birthDate"/>
+
     <br>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email"/>
