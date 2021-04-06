@@ -3,6 +3,7 @@ package com.alinatkachuk.springtask.entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
 import java.util.List;
@@ -26,6 +27,7 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_date")
 	private Calendar birthDate;
 

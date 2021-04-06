@@ -14,8 +14,13 @@
     <input type="text" th:field="*{lastName}" id="lastName"/>
     <br>
     <label for="birthDate">Choose birth date: </label>
-    <input type="date" th:value = "${birthDate}" id="birthDate"/>
-
+    <input type="date" th:field = "*{birthDate}" id="birthDate"/>
+    <br>
+    <label for="gender">Choose your gender: </label>
+    <select name="gender">
+        <option th:each="gender : ${T(com.alinatkachuk.springtask.entity.Gender).values()}"
+                th:value="${gender}" th:text="${gender}"></option>
+    </select>
     <br>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email"/>
