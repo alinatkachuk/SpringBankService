@@ -34,7 +34,6 @@ public class LoginController {
 
 	@GetMapping("/register")
 	public String registerPage(Model model)  {
-		model.addAttribute("birthDate", "");
 		model.addAttribute("user", new User());
 		return "registerPage";
 	}

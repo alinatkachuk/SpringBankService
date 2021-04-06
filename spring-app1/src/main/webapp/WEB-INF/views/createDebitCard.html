@@ -7,15 +7,18 @@
 <body>
 
 <form th:method="POST" th:action="@{/debitcards/new}" th:object="${debitCard}">
-    <label for="expirationDate">Enter expiration date: </label>
-    <input type="text" th:field="*{expirationDate}" id="expirationDate"/>
+    <label for="expirationDate">Choose expiration date: </label>
+    <input type="date" th:field = "*{expirationDate}" id="expirationDate"/>
     <br>
-    <label for="paymentSystem">Payment system: </label>
-    <input type="paymentSystem" th:field="*{paymentSystem}" id="paymentSystem"/>
+    <label for="paymentSystem">Choose payment system: </label>
+    <select name="paymentSystem">
+        <option disabled>Choose payment system</option>
+        <option th:each="paymentSystem : ${T(com.alinatkachuk.springtask.entity.PaymentSystem).values()}"
+                th:value="${paymentSystem}" th:text="${paymentSystem}"></option>
+    </select>
     <br>
     <input type="submit" value="Create"/>
     <br>
 </form>
-
 </body>
 </html>

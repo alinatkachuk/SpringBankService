@@ -10,10 +10,13 @@
     <label for="sum">Enter credit amount: </label>
     <input type="text" th:field="*{sum}" id="sum"/>
     <br>
-    <label for="interestRate">Interest rate: </label>
-    <input type="text" th:field="*{interestRate}" id="interestRate"/>
+    <label for="interestRate">Choose interest rate (in %): </label>
+    <select th:field="*{interestRate}">
+        <option th:each="rates : ${allRates}" th:value="${rates}" th:text="${rates*100}">
+        </option>
+    </select>
     <br>
-    <label for="loanTerm">Loan term: </label>
+    <label for="loanTerm">Loan term (in months): </label>
     <input type="text" th:field="*{loanTerm}" id="loanTerm"/>
     <br>
     <input type="submit" value="Create"/>

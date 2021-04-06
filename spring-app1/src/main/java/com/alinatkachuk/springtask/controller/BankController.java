@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.alinatkachuk.springtask.controller.LoginController.userForLogin;
 
 @Controller
@@ -21,6 +25,7 @@ public class BankController {
     private final UserDAO userDAO;
     private final LoanDAO loanDAO;
     private final DebitCardDAO debitCardDAO;
+    public List<Double> allRates  = new ArrayList<>(Arrays.asList(0.12, 0.24, 0.35));
 
     @Autowired
     public BankController(UserDAO userDAO, LoanDAO loanDAO, DebitCardDAO debitCardDAO) {
@@ -31,8 +36,9 @@ public class BankController {
 
     @GetMapping("/loans")
     public String createLoansPage(Model model) {
+        model.addAttribute("allRates", allRates);
         model.addAttribute("loan", new Loan());
-        return "afterAuthorize";
+        return "createLoan";
     }
 
     @PostMapping("/loans/new")
@@ -44,12 +50,12 @@ public class BankController {
 
     @GetMapping("/debitcards")
     public String createDebitCardsPage(Model model) {
-        model.addAttribute("debitcard", new DebitCard());
-        return "afterAuthorize";
+        model.addAttribute("debitCard", new DebitCard());
+        return "createDebitCard";
     }
 
     @PostMapping("/debitcards/new")
-    public String createLoan(@ModelAttribute("debitcard") DebitCard debitCard) {
+    public String createLoan(@ModelAttribute("debitCard") DebitCard debitCard) {
         debitCardDAO.addDebitCard(debitCard);
         userDAO.editUser(userForLogin);
         return "afterAuthorize";

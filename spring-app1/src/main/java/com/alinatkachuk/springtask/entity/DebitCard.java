@@ -1,5 +1,7 @@
 package com.alinatkachuk.springtask.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -17,9 +19,11 @@ public class DebitCard {
     @Column(name = "card_number")
     private String cardNumber;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "expiration_date")
     private Calendar expirationDate;
 
+    @Column(name = "ccv")
     private String ccv;
 
     @Enumerated(EnumType.STRING)

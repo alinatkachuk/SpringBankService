@@ -18,6 +18,7 @@
     <br>
     <label for="gender">Choose your gender: </label>
     <select name="gender">
+        <option disabled>Choose your gender</option>
         <option th:each="gender : ${T(com.alinatkachuk.springtask.entity.Gender).values()}"
                 th:value="${gender}" th:text="${gender}"></option>
     </select>
