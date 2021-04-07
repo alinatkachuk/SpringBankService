@@ -25,11 +25,11 @@ public class Loan {
     @Column(name = "monthly_payment")
     private double monthlyPayment;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id")
     private User user;
 
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public void setId (Long id) {
         this.id=id;
     }
@@ -71,6 +71,18 @@ public class Loan {
         return user;
     }
     public void setUser (User user) {
+        this.user=user;
+    }
+
+    public Loan () { }
+    public Loan (Long id, Calendar registrationDate, double sum, double interestRate, int loanTerm,
+                 double monthlyPayment, User user) {
+        this.id=id;
+        this.registrationDate=registrationDate;
+        this.sum=sum;
+        this.interestRate=interestRate;
+        this.loanTerm=loanTerm;
+        this.monthlyPayment=monthlyPayment;
         this.user=user;
     }
 

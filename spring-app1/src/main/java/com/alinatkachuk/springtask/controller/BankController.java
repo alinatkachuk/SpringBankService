@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.alinatkachuk.springtask.controller.LoginController.userForLogin;
@@ -26,6 +27,7 @@ public class BankController {
     private final LoanDAO loanDAO;
     private final DebitCardDAO debitCardDAO;
     public List<Double> allRates  = new ArrayList<>(Arrays.asList(0.12, 0.24, 0.35));
+
 
     @Autowired
     public BankController(UserDAO userDAO, LoanDAO loanDAO, DebitCardDAO debitCardDAO) {
@@ -43,7 +45,15 @@ public class BankController {
 
     @PostMapping("/loans/new")
     public String createLoan(@ModelAttribute("loan") Loan loan) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.getTime();
+        loan.setRegistrationDate(calendar);
+        loan.setMonthlyPayment(loan.getSum()*(((loan.getInterestRate()/12)*Math.pow((1+(loan.getInterestRate()/12)),
+                (loan.getLoanTerm()*12)))/((Math.pow((1+(loan.getInterestRate()/12)), (loan.getLoanTerm()*12)))-1)));
+        loan.setUser(userForLogin);
         loanDAO.addLoan(loan);
+        userForLogin.getLoan().add(new Loan(loan.getId(), loan.getRegistrationDate(), loan.getSum(),
+                loan.getInterestRate(), loan.getLoanTerm(), loan.getMonthlyPayment(), loan.getUser()));
         userDAO.editUser(userForLogin);
         return "afterAuthorize";
     }
@@ -57,6 +67,7 @@ public class BankController {
     @PostMapping("/debitcards/new")
     public String createLoan(@ModelAttribute("debitCard") DebitCard debitCard) {
         debitCardDAO.addDebitCard(debitCard);
+        debitCard.setUser(userForLogin);
         userDAO.editUser(userForLogin);
         return "afterAuthorize";
     }
