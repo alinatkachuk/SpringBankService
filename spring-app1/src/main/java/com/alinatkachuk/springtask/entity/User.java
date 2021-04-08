@@ -42,10 +42,10 @@ public class User {
 	@NotEmpty (message = "The 'Password' field is empty!")
 	private String password;
 
-	@OneToMany (fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DebitCard> debitCard;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Loan> loan;
 
 	public Long getId() { return id; }

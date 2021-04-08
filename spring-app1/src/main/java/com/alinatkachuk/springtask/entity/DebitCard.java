@@ -30,7 +30,7 @@ public class DebitCard {
     @Column(columnDefinition="enum('visa','mastercard', 'belcard')")
     private PaymentSystem paymentSystem;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id")
     private User user;
 
