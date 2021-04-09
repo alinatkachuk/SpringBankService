@@ -26,6 +26,11 @@ public class LoginController {
 		this.userDAO = userDAO;
     }
 
+	@GetMapping("/")
+	public String mainPage() {
+		return "index";
+	}
+
 	@GetMapping("/users")
 	public String usersPage(Model model) {
 		model.addAttribute("allUsers", userDAO.allUsers());

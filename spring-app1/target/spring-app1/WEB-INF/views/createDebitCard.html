@@ -10,7 +10,7 @@
     <label for="allExpirationDates">Choose expiration date (in years): </label>
     <select name="allExpirationDates">
         <option th:each="expirationDateInteger : ${allExpirationDates}"
-                th:value="${expirationDateInteger}"
+                th:value="*{expirationDateInteger}"
                 th:text="${expirationDateInteger}">
         </option>
     </select>
