@@ -7,11 +7,11 @@
 <body>
 
 <form th:method="POST" th:action="@{/debitcards/new}" th:object="${debitCard}">
-    <label for="allExpirationDates">Choose expiration date (in years): </label>
-    <select name="allExpirationDates">
-        <option th:each="expirationDateInteger : ${allExpirationDates}"
-                th:value="*{expirationDateInteger}"
-                th:text="${expirationDateInteger}">
+    <label for="validity">Choose expiration date (in years): </label>
+    <select name="validity">
+        <option th:each="validity : ${T(com.alinatkachuk.springtask.entity.DebitCardValidity).values()}"
+                th:value="${validity}"
+                th:text="${validity}">
         </option>
     </select>
 

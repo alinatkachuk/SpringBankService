@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="postgres@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.20">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.21">
     <root id="1">
       <ServerVersion>13.2</ServerVersion>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+13441||-9223372036854775808|c|G
+13441||10|c|G
+13441||10|C|G
+13441||10|T|G</Grants>
       <DateStyle>dmy</DateStyle>
       <TimeZones>true ACDT
 true ACSST
@@ -45,14 +53,14 @@ false Africa/Blantyre
 false Africa/Brazzaville
 false Africa/Bujumbura
 false Africa/Cairo
-false Africa/Casablanca
+true Africa/Casablanca
 true Africa/Ceuta
 false Africa/Conakry
 false Africa/Dakar
 false Africa/Dar_es_Salaam
 false Africa/Djibouti
 false Africa/Douala
-false Africa/El_Aaiun
+true Africa/El_Aaiun
 false Africa/Freetown
 false Africa/Gaborone
 false Africa/Harare
@@ -784,7 +792,7 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <StartupTime>1615967741</StartupTime>
+      <StartupTime>1618148214</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13442</ObjectId>
@@ -793,8 +801,18 @@ false Zulu
     </database>
     <database id="3" parent="1" name="users_db">
       <ObjectId>16394</ObjectId>
+      <Grants>11||10|C|G
+11||-9223372036854775808|U|G
+11||10|U|G
+2200||-9223372036854775808|C|G
+2200||10|C|G
+2200||-9223372036854775808|U|G
+2200||10|U|G
+13158||10|C|G
+13158||-9223372036854775808|U|G
+13158||10|U|G</Grants>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>637</IntrospectionStateNumber>
+      <IntrospectionStateNumber>669</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|24654|24614|1
 sequence|table|24657|24609|1
@@ -806,6 +824,9 @@ sequence|table|24660|24619|1
     </role>
     <role id="5" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
+      <RoleGrants>3374
+3375
+3377</RoleGrants>
     </role>
     <role id="6" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
@@ -846,30 +867,21 @@ sequence|table|24660|24619|1
     </tablespace>
     <schema id="15" parent="3" name="information_schema">
       <ObjectId>13158</ObjectId>
-      <Acl>10=UC/10
-U/10
-</Acl>
       <StateNumber>293</StateNumber>
       <Owner>postgres</Owner>
     </schema>
     <schema id="16" parent="3" name="pg_catalog">
       <ObjectId>11</ObjectId>
       <Comment>system catalog schema</Comment>
-      <Acl>10=UC/10
-U/10
-</Acl>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
     </schema>
     <schema id="17" parent="3" name="public">
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
-      <Acl>10=UC/10
-UC/10
-</Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>638</IntrospectionStateNumber>
+      <IntrospectionStateNumber>670</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="18" parent="3" name="plpgsql">
@@ -1009,7 +1021,7 @@ BELCARD</Labels>
     <table id="35" parent="17" name="data_debit_card">
       <ObjectId>24614</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>588</StateNumber>
+      <StateNumber>664</StateNumber>
     </table>
     <table id="36" parent="17" name="data_loan">
       <ObjectId>24609</ObjectId>
@@ -1044,7 +1056,7 @@ BELCARD</Labels>
     <column id="41" parent="35" name="expiration_date">
       <Position>4</Position>
       <DataType>date|0s</DataType>
-      <StateNumber>576</StateNumber>
+      <StateNumber>647</StateNumber>
       <TypeId>1082</TypeId>
     </column>
     <column id="42" parent="35" name="ccv">
@@ -1065,9 +1077,15 @@ BELCARD</Labels>
       <StateNumber>576</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="45" parent="35" name="data_debit_card_pkey">
+    <column id="45" parent="35" name="validity">
+      <Position>8</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>664</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="46" parent="35" name="data_debit_card_pkey">
       <ObjectId>24617</ObjectId>
-      <StateNumber>588</StateNumber>
+      <StateNumber>664</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1075,14 +1093,14 @@ BELCARD</Labels>
       <CollationIds>0</CollationIds>
       <ClassIds>3124</ClassIds>
     </index>
-    <key id="46" parent="35" name="data_debit_card_pkey">
+    <key id="47" parent="35" name="data_debit_card_pkey">
       <ObjectId>24618</ObjectId>
       <StateNumber>576</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>data_debit_card_pkey</UnderlyingIndexName>
     </key>
-    <column id="47" parent="36" name="id">
+    <column id="48" parent="36" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -1090,43 +1108,43 @@ BELCARD</Labels>
       <DefaultExpression>nextval(&apos;data_loan_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="48" parent="36" name="registration_date">
+    <column id="49" parent="36" name="registration_date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="49" parent="36" name="sum">
+    <column id="50" parent="36" name="sum">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="50" parent="36" name="interest_rate">
+    <column id="51" parent="36" name="interest_rate">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="51" parent="36" name="loan_term">
+    <column id="52" parent="36" name="loan_term">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="52" parent="36" name="monthly_payment">
+    <column id="53" parent="36" name="monthly_payment">
       <Position>6</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="53" parent="36" name="user_id">
+    <column id="54" parent="36" name="user_id">
       <Position>7</Position>
       <DataType>bigint|0s</DataType>
       <StateNumber>573</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="54" parent="36" name="data_loan_pkey">
+    <index id="55" parent="36" name="data_loan_pkey">
       <ObjectId>24612</ObjectId>
       <StateNumber>573</StateNumber>
       <ColNames>id</ColNames>
@@ -1136,14 +1154,14 @@ BELCARD</Labels>
       <CollationIds>0</CollationIds>
       <ClassIds>3124</ClassIds>
     </index>
-    <key id="55" parent="36" name="data_loan_pkey">
+    <key id="56" parent="36" name="data_loan_pkey">
       <ObjectId>24613</ObjectId>
       <StateNumber>573</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>data_loan_pkey</UnderlyingIndexName>
     </key>
-    <column id="56" parent="37" name="id">
+    <column id="57" parent="37" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -1151,43 +1169,43 @@ BELCARD</Labels>
       <DefaultExpression>nextval(&apos;data_user_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="57" parent="37" name="first_name">
+    <column id="58" parent="37" name="first_name">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>579</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="58" parent="37" name="last_name">
+    <column id="59" parent="37" name="last_name">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>579</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="59" parent="37" name="birth_date">
+    <column id="60" parent="37" name="birth_date">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <StateNumber>579</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="60" parent="37" name="gender">
+    <column id="61" parent="37" name="gender">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>591</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="61" parent="37" name="email">
+    <column id="62" parent="37" name="email">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>579</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="62" parent="37" name="password">
+    <column id="63" parent="37" name="password">
       <Position>7</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>579</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="63" parent="37" name="data_user_pkey">
+    <index id="64" parent="37" name="data_user_pkey">
       <ObjectId>24622</ObjectId>
       <StateNumber>591</StateNumber>
       <ColNames>id</ColNames>
@@ -1197,7 +1215,7 @@ BELCARD</Labels>
       <CollationIds>0</CollationIds>
       <ClassIds>3124</ClassIds>
     </index>
-    <key id="64" parent="37" name="data_user_pkey">
+    <key id="65" parent="37" name="data_user_pkey">
       <ObjectId>24623</ObjectId>
       <StateNumber>579</StateNumber>
       <ColNames>id</ColNames>

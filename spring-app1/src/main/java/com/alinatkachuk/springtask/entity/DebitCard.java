@@ -23,11 +23,15 @@ public class DebitCard {
     @Column(name = "expiration_date")
     private Calendar expirationDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "validity", columnDefinition="enum('one','three', 'five')")
+    private DebitCardValidity validity;
+
     @Column(name = "ccv")
     private String ccv;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition="enum('visa','mastercard', 'belcard')")
+    @Column(name = "payment_system", columnDefinition="enum('visa','mastercard', 'belcard')")
     private PaymentSystem paymentSystem;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,6 +52,9 @@ public class DebitCard {
     public Calendar getExpirationDate() { return expirationDate; }
     public void setExpirationDate(Calendar expirationDate) { this.expirationDate=expirationDate; }
 
+    public DebitCardValidity getValidity() { return validity; }
+    public void setValidity(DebitCardValidity validity) { this.validity=validity; }
+
     public String getCcv() { return ccv; }
     public void setCcv (String ccv) { this.ccv=ccv; }
 
@@ -66,6 +73,7 @@ public class DebitCard {
                 "Account balance: "+accountBalance+"\n"+
                 "Card number: "+cardNumber+"\n"+
                 "Expiration date: "+expirationDate+"\n"+
+                "Validity: "+validity+"\n"+
                 "CCV: "+ccv+"\n"+
                 "Payment system: "+paymentSystem+"\n";
     }

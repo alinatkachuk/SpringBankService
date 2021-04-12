@@ -24,29 +24,10 @@ import static com.alinatkachuk.springtask.controller.LoginController.userForLogi
 @Controller
 public class BankController {
 
-    public static Loan loan = null;
     private final UserDAO userDAO;
     private final LoanDAO loanDAO;
     private final DebitCardDAO debitCardDAO;
     public List<Double> allRates  = new ArrayList<>(Arrays.asList(0.12, 0.24, 0.35));
-    List<Integer> allExpirationDates  = new ArrayList<>(Arrays.asList(1, 3, 5));
-
-    public List<Calendar> allExpirationDates () {
-        Calendar oneYearExpirationDate = Calendar.getInstance();
-        oneYearExpirationDate.getTime();
-        oneYearExpirationDate.add(Calendar.YEAR, 1);
-        Calendar threeYearsExpirationDate = Calendar.getInstance();
-        threeYearsExpirationDate.getTime();
-        threeYearsExpirationDate.add(Calendar.YEAR, 3);
-        Calendar fiveYearsExpirationDate = Calendar.getInstance();
-        fiveYearsExpirationDate.getTime();
-        fiveYearsExpirationDate.add(Calendar.YEAR, 5);
-        List<Calendar> allExpirationDates  = Arrays.asList();
-        allExpirationDates.add(oneYearExpirationDate);
-        allExpirationDates.add(threeYearsExpirationDate);
-        allExpirationDates.add(fiveYearsExpirationDate);
-        return  allExpirationDates;
-    }
 
     @Autowired
     public BankController(UserDAO userDAO, LoanDAO loanDAO, DebitCardDAO debitCardDAO) {
@@ -78,17 +59,15 @@ public class BankController {
     @GetMapping("/debitcards")
     public String createDebitCardsPage(Model model) {
         model.addAttribute("debitCard", new DebitCard());
-        model.addAttribute("allExpirationDates", allExpirationDates);
         return "createDebitCard";
     }
 
     @PostMapping("/debitcards/new")
-    public String createDebitCard(@ModelAttribute("debitCard") DebitCard debitCard,
-                                  @ModelAttribute("expirationDateInteger") Integer expirationDateInteger) {
+    public String createDebitCard(@ModelAttribute("debitCard") DebitCard debitCard) {
         //expiration date
         Calendar expirationDate = Calendar.getInstance();
         expirationDate.getTime();
-        expirationDate.add(Calendar.YEAR, expirationDateInteger);
+        expirationDate.add(Calendar.YEAR, debitCard.getValidity().getDebitCardValidity());
         debitCard.setExpirationDate(expirationDate);
         //card number
         if (debitCard.getPaymentSystem()==PaymentSystem.VISA) {
@@ -102,7 +81,7 @@ public class BankController {
             debitCard.setCardNumber(new DecimalFormat("0000,0000,0000,0000").format(cardNumberBelCard));
         }
         //CCV
-        int ccv = (int) (Math.random()*100);
+        int ccv = (int) (Math.random()*1000);
         debitCard.setCcv(new DecimalFormat("000").format(ccv));
         debitCard.setUser(userForLogin);
         debitCardDAO.addDebitCard(debitCard);
