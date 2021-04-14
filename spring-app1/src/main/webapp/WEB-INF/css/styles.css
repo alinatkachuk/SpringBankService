@@ -21,3 +21,29 @@ img {
     width: 100%;
 }
 
+#authorize {
+    background: #222 url('../img/authorize.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.authorize-page {
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 1.875rem;
+}
+
+#register {
+    background: #222 url('../img/register.jpg') no-repeat center center;
+    background-size: cover;
+    color:white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.register-page {
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 1.875rem;
+}
