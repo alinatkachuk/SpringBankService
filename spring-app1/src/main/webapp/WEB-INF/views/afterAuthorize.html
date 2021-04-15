@@ -22,16 +22,6 @@
                     <p th:text="${userForLogin.getFirstName()}"></p>
                     <p th:text="${userForLogin.getLastName()}"></p>
                     <br>
-                    <h3>Info about loans</h3>
-                    <div th:each="loans : ${userForLogin.getLoan()}">
-                        <h5 th:text="${loans.toString()}"></h5>
-                    </div>
-                    <br>
-                    <h3>Info about cards</h3>
-                    <div th:each="cards : ${userForLogin.getDebitCard()}">
-                        <h5 th:text="${cards.toString()}"></h5>
-                    </div>
-                    <br>
                     <a href="http://localhost:8080/loans" class="btn btn-link" type="button">Create loan</a>
                     <br>
                     <a href="http://localhost:8080/debitcards" class="btn btn-link" type="button">Create debit card</a>
