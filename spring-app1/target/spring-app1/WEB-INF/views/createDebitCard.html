@@ -2,32 +2,50 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible " content="ie-edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <title>Create debit card</title>
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/debitcards/new}" th:object="${debitCard}">
-    <label for="validity">Choose expiration date (in years): </label>
-    <select name="validity">
-        <option th:each="validity : ${T(com.alinatkachuk.springtask.entity.DebitCardValidity).values()}"
-                th:value="${validity}"
-                th:text="${validity}">
-        </option>
-    </select>
+<section id="card">
+    <div class="section-content">
+        <div class="row">
+            <div class="col-md-12 offset-md-8">
+                <div class="register-page">
+                    <h2>Create debit card</h2>
+                    <form th:method="POST" th:action="@{/debitcards/new}" th:object="${debitCard}">
+                        <div class="row mb-3">
+                            <label for="validity">Choose expiration date (in years): </label>
+                            <select class="form-select" name="validity">
+                                <option selected>Choose, please</option>
+                                <option th:each="validity : ${T(com.alinatkachuk.springtask.entity.DebitCardValidity).values()}"
+                                        th:value="${validity}"
+                                        th:text="${validity}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="paymentSystem">Choose payment system: </label>
+                            <select class="form-select" name="paymentSystem">
+                                <option selected>Choose, please</option>
+                                <option th:each="paymentSystem : ${T(com.alinatkachuk.springtask.entity.PaymentSystem).values()}"
+                                        th:value="${paymentSystem}"
+                                        th:text="${paymentSystem}">
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-outline-light" style="background-color: #b1061e;">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <br>
-    <label for="paymentSystem">Choose payment system: </label>
-    <select name="paymentSystem">
-        <option disabled>Choose payment system</option>
-        <option th:each="paymentSystem : ${T(com.alinatkachuk.springtask.entity.PaymentSystem).values()}"
-                th:value="${paymentSystem}"
-                th:text="${paymentSystem}">
-
-        </option>
-    </select>
-    <br>
-    <input type="submit" value="Create"/>
-    <br>
-</form>
 </body>
 </html>

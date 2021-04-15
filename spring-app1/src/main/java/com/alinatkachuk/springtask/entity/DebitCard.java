@@ -69,8 +69,7 @@ public class DebitCard {
     }
 
     public String toString() {
-        return  "Id: "+id+"\n"+
-                "Account balance: "+accountBalance+"\n"+
+        return  "Account balance: "+accountBalance+"\n"+
                 "Card number: "+cardNumber+"\n"+
                 "Expiration date: "+expirationDate+"\n"+
                 "Validity: "+validity+"\n"+

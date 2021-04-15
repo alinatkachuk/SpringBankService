@@ -53,7 +53,7 @@ public class BankController {
         loan.setUser(userForLogin);
         loanDAO.addLoan(loan);
         userDAO.editUser(userForLogin);
-        return "afterAuthorize";
+        return "redirect:/home";
     }
 
     @GetMapping("/debitcards")
@@ -86,6 +86,6 @@ public class BankController {
         debitCard.setUser(userForLogin);
         debitCardDAO.addDebitCard(debitCard);
         userDAO.editUser(userForLogin);
-        return "afterAuthorize";
+        return "redirect:/home";
     }
 }
